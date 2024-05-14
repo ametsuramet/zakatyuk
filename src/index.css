@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Ubuntu Sans", sans-serif;
+  background-color: #f7f7f7;
+}
+
+.logo{
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.menu-bottom .active {
+  @apply text-red-400
+}
+
+.menu-top.scrolled {
+  @apply bg-white shadow-sm text-gray-800
+}
+
+.custom-progress {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
