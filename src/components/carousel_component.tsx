@@ -9,36 +9,36 @@ export const Paper = styled.div`
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
 
-export const Item = styled.div < { img: string } > `
+export const Item = styled.div < { img: string, height?: string | null, } > `
   text-align: center;
-  height: 200px;
+  height:  ${(props) => `${props.height ?? '240px'}`};
   background-image: ${(props) => `url(${props.img})`};
   background-size: cover;
   object-fit: cover;
 `;
 
-export const CarouselContainer = styled.div < { sliding: boolean } > `
+export const CarouselContainer = styled.div < { sliding: boolean, width?: string | null } > `
   
   display: flex;
   transition: ${(props) => (props.sliding ? "none" : "transform 1s ease")};
   transform: ${(props) => {
-    if (!props.sliding) return "translateX(calc(-100% - 20px))";
-    if (props.dir === PREV) return "translateX(calc(2 * (-100% - 20px)))";
+    if (!props.sliding) return `translateX(calc(-${props.width ?? '100%'} - 20px))`;
+    if (props.dir === PREV) return `translateX(calc(2 * (-${props.width ?? '100%'} - 20px)))`;
     return "translateX(0%)";
   }};
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div < { sliding: boolean, width?: string | null } > ` 
   border-radius: 0.375rem;
-  width: 100%;
+  width:  ${(props) => (props.width ?? '100%')};
   overflow: hidden;
   box-shadow: 5px 5px 20px 7px rgba(168, 168, 168, 1);
 `;
 
-export const CarouselSlot = styled.div < { order: number } > `
+export const CarouselSlot = styled.div < { order: number, width?: string | null } > `
   border-radius: 0.375rem;
-  flex: 1 0 100%;
-  flex-basis: 100%;
+  flex: 1 0 ${(props) => (props.width ?? '100%')};
+  flex-basis: ${(props) => (props.width ?? '100%')};
   margin-right: 20px;
   order: ${(props) => props.order};
 `;

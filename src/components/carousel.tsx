@@ -28,7 +28,7 @@ const getOrder = (index: number, pos: number, numItems: number) => {
 
 const getInitialState = (numItems: number): CarouselState => ({ pos: numItems - 1, sliding: false, dir: NEXT });
 
-const Carousel: FunctionComponent<{ children: ReactNode }> = (props) => {
+const Carousel: FunctionComponent<{ children: ReactNode, wrapperWidth?: string, width?: string | null, height?: string | null }> = (props) => {
   const numItems = React.Children.count(props.children);
   const [state, dispatch] = React.useReducer(reducer, getInitialState(numItems));
 
@@ -49,10 +49,11 @@ const Carousel: FunctionComponent<{ children: ReactNode }> = (props) => {
 
   return (
     <div {...handlers}>
-      <Wrapper>
-        <CarouselContainer dir={state.dir} sliding={state.sliding}>
+      <Wrapper sliding={state.sliding} width={props.wrapperWidth}>
+        <CarouselContainer dir={state.dir} sliding={state.sliding} width={props.width}>
           {React.Children.map(props.children, (child, index) => (
             <CarouselSlot
+              width={props.width}
               order={getOrder(index, state.pos, numItems)}
             >
               {child}
@@ -60,7 +61,7 @@ const Carousel: FunctionComponent<{ children: ReactNode }> = (props) => {
           ))}
         </CarouselContainer>
       </Wrapper>
-      
+
     </div>
   );
 };
